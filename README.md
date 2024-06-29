@@ -1,1 +1,1 @@
-In this website you can paste you code snippet and share it with anyone! 
+In this website you can paste your code snippet and share it with anyone! 
