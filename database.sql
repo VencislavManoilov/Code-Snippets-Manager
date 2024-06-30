@@ -17,9 +17,3 @@ create table snippets (
     created_at timestamp default current_timestamp,
     foreign key (user_id) references users(id)
 );
-
-create table sessions (
-    id varchar(32) not null,
-    user_id int,
-    foreign key (user_id) references users(id)
-)

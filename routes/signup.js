@@ -3,7 +3,7 @@ const crypto = require("crypto");
 const { body, validationResult } = require("express-validator");
 const router = express.Router();
 
-router.post("/signup",
+router.post("/",
     [
         // Validate and sanitize inputs
         body("name").notEmpty().withMessage("Name is required").trim().escape(),

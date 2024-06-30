@@ -4,18 +4,15 @@ const path = require("path");
 const fs = require("fs");
 const mysql = require("mysql2");
 const bodyParser = require("body-parser");
+const session = require("express-session");
+const MySQLStore = require("express-mysql-session")(session);
+const isAuthenticated = require("./middleware/isAuthenticated");
 
 const PORT = 8080;
 
 app.use(bodyParser.json());
 // Parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
-
-const auth = require("./routes/auth");
-app.use("/auth", (req, res, next) => {
-  req.db = db;
-  next();
-}, auth);
 
 // Configure MySQL connection
 const db = mysql.createConnection({
@@ -37,8 +34,36 @@ db.connect((err, connection) => {
     console.log('Connected to MySQL');
 });
 
-app.get("/test", (req, res) => {
-    res.status(200).send("It is working");
+// Session store setup
+const sessionStore = new MySQLStore({
+  expiration: 1000 * 60 * 60 * 24, // 1 day
+  endConnectionOnClose: false // Keep the connection open for session store
+}, db.promise());
+
+// Session middleware setup
+app.use(session({
+    key: 'session_cookie_name',
+    secret: 'your_secret',
+    store: sessionStore,
+    resave: false,
+    saveUninitialized: false,
+    cookie: { maxAge: 1000 * 60 * 60 * 24 } // 1 day
+}));
+
+const signupRoute = require("./routes/signup");
+app.use("/signup", (req, res, next) => {
+    req.db = db;
+    next();
+}, signupRoute);
+
+const loginRoute = require("./routes/login");
+app.use("/login", (req, res, next) => {
+    req.db = db;
+    next();
+}, loginRoute);
+
+app.get("/test", isAuthenticated, (req, res) => {
+    res.status(200).send("You are authenicated");
 })
 
 app.listen(PORT, () => {
