@@ -12,9 +12,14 @@ router.post(
     (req, res) => {
         // Check for validation errors
         const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-            return res.status(400).json({ errors: errors.array() });
+        if(!errors.isEmpty()) {
+            let errorMessages = [];
+            for(let i = 0; i < errors.array().length; i++) {
+                errorMessages.push(errors.array()[i].msg);
+            }
+            return res.status(400).json({ errors: errorMessages });
         }
+
 
         const { email, password } = req.body;
 
