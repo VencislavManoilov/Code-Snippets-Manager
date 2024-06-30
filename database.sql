@@ -14,6 +14,7 @@ create table snippets (
     user_id int,
     title varchar(255),
     code TEXT not null,
+    type varchar(12) not null,
     created_at timestamp default current_timestamp,
     foreign key (user_id) references users(id)
 );
