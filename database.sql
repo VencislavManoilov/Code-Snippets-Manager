@@ -6,7 +6,7 @@ create table users (
     name varchar(100) not null,
     age int not null,
     email varchar(100) not null,
-    password varchar(100) not null
+    password varchar(32) not null
 );
 
 create table snippets (
@@ -17,3 +17,9 @@ create table snippets (
     created_at timestamp default current_timestamp,
     foreign key (user_id) references users(id)
 );
+
+create table sessions (
+    id varchar(32) not null,
+    user_id int,
+    foreign key (user_id) references users(id)
+)

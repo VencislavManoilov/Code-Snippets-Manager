@@ -3,14 +3,25 @@ const app = express();
 const path = require("path");
 const fs = require("fs");
 const mysql = require("mysql2");
+const bodyParser = require("body-parser");
 
 const PORT = 8080;
+
+app.use(bodyParser.json());
+// Parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: true }));
+
+const auth = require("./routes/auth");
+app.use("/auth", (req, res, next) => {
+  req.db = db;
+  next();
+}, auth);
 
 // Configure MySQL connection
 const db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: "Asdf1234567890",
+    password: "your_secret_password",
     database: 'code_snippets',
     waitForConnections: true,
     connectionLimit: 10,
