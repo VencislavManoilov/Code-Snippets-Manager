@@ -36,8 +36,8 @@ db.connect((err, connection) => {
 
 // Session store setup
 const sessionStore = new MySQLStore({
-  expiration: 1000 * 60 * 60 * 24, // 1 day
-  endConnectionOnClose: false // Keep the connection open for session store
+    expiration: 1000 * 60 * 60 * 24, // 1 day
+    endConnectionOnClose: false // Keep the connection open for session store
 }, db.promise());
 
 // Session middleware setup
@@ -61,6 +61,12 @@ app.use("/login", (req, res, next) => {
     req.db = db;
     next();
 }, loginRoute);
+
+const createSnippetRoute = require("./routes/createSnippet");
+app.use("/snippet/create", (req, res, next) => {
+    req.db = db;
+    next();
+}, createSnippetRoute);
 
 app.get("/test", isAuthenticated, (req, res) => {
     res.status(200).send("You are authenicated");
