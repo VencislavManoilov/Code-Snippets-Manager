@@ -74,6 +74,12 @@ app.use("/snippet/get", (req, res, next) => {
     next();
 }, getSnippetRoute);
 
+const getUserSnippetIds = require("./routes/getUserSnippetIds");
+app.use("/snippet/ids", (req, res, next) => {
+    req.db = db;
+    next();
+}, getUserSnippetIds);
+
 app.get("/test", isAuthenticated, (req, res) => {
     res.status(200).send("You are authenicated");
 })
