@@ -18,7 +18,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: "your_secret_password",
+    password: "Asdf1234567890",
     database: 'code_snippets',
     waitForConnections: true,
     connectionLimit: 10,
@@ -49,6 +49,13 @@ app.use(session({
     saveUninitialized: false,
     cookie: { maxAge: 1000 * 60 * 60 * 24 } // 1 day
 }));
+
+app.get("/", (req, res) => {
+    res.status(200).json({
+        message: "Welcome to the Code Snippets API",
+        version: "1.0.0"
+    });
+});
 
 const signupRoute = require("./routes/signup");
 app.use("/signup", (req, res, next) => {
@@ -82,8 +89,14 @@ app.use("/snippet/ids", (req, res, next) => {
 
 app.get("/test", isAuthenticated, (req, res) => {
     res.status(200).send("You are authenicated");
+});
+
+app.get("*", (req, res) => {
+    res.status(404).json({
+        message: "Not found"
+    });
 })
 
 app.listen(PORT, () => {
     console.log("Listening to", PORT);
-})
+});
