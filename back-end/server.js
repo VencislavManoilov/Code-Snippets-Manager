@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const path = require("path");
 const fs = require("fs");
+const cors = require("cors");
 const mysql = require("mysql2");
 const bodyParser = require("body-parser");
 const session = require("express-session");
@@ -14,11 +15,18 @@ app.use(bodyParser.json());
 // Parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
 
+const corsOptions = {
+    origin: 'http://192.168.1.11:3000',
+    credentials: true
+};
+
+app.use(cors(corsOptions));
+
 // Configure MySQL connection
 const db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: "your_secret_password",
+    password: "Asdf1234567890",
     database: 'code_snippets',
     waitForConnections: true,
     connectionLimit: 10,
@@ -87,8 +95,8 @@ app.use("/snippet/ids", (req, res, next) => {
     next();
 }, getUserSnippetIds);
 
-app.get("/test", isAuthenticated, (req, res) => {
-    res.status(200).send("You are authenicated");
+app.get("/user", isAuthenticated, (req, res) => {
+    res.status(200).json({ success: true });
 });
 
 app.get("*", (req, res) => {

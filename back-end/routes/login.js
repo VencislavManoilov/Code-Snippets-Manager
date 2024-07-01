@@ -38,8 +38,6 @@ router.post(
                 if (results.length === 0) {
                     return res.status(401).json({ error: "Invalid email or password" });
                 }
-
-                console.log(req.session);
     
                 // Set the session
                 req.session.userId = results[0].id;
