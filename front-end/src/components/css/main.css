@@ -1,5 +1,10 @@
 .login, .signup {
-    font-size: medium;
-    text-decoration: none;
     margin-left: 15px;
+}
+
+.link {
+    color: white;
+    font-size: 1.5em;
+    font-weight: bold;
+    text-decoration: none;
 }
