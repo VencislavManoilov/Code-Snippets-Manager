@@ -77,6 +77,12 @@ app.use("/login", (req, res, next) => {
     next();
 }, loginRoute);
 
+const logoutRoute = require("./routes/logout");
+app.use("/logout", (req, res, next) => {
+    req.db = db;
+    next();
+}, logoutRoute);
+
 const createSnippetRoute = require("./routes/createSnippet");
 app.use("/snippet/create", (req, res, next) => {
     req.db = db;
@@ -95,9 +101,11 @@ app.use("/snippet/ids", (req, res, next) => {
     next();
 }, getUserSnippetIds);
 
-app.get("/user", isAuthenticated, (req, res) => {
-    res.status(200).json({ success: true });
-});
+const getUserRoute = require("./routes/getUser");
+app.use("/user", (req, res, next) => {
+    req.db = db;
+    next();
+}, getUserRoute);
 
 app.get("*", (req, res) => {
     res.status(404).json({
