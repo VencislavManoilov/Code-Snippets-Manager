@@ -1,8 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Routes, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import axios from "axios";
 import Navbar from './components/Navbar';
 import Login from './components/Login';
+import Signup from './components/Signup';
+
+const InitComponent = ({ user }) => {
+    return user ? (
+        <h3>You are logged in!</h3>
+    ) : (
+        <h3 className='text-center mt-5'>You need to <Link to="/login">login</Link></h3>
+    );
+};
 
 function App() {
     const [user, setUser] = useState(null);
@@ -20,7 +29,6 @@ function App() {
                 setLoading(false);
             }
         } catch (error) {
-            console.error("Failed to check login status:", error);
             setLoading(false);
         }
     }
@@ -32,7 +40,11 @@ function App() {
     return (
         <Router>
             <Navbar />
-            {user ? <h3>You are logged in!</h3> : <Login />}
+            <Routes>
+                <Route path='/' element={<InitComponent user={user} />} />
+                <Route path='/login' element={<Login />} />
+                <Route path='/signup' element={<Signup />} />
+            </Routes>
         </Router>
     );
 }
