@@ -10,7 +10,7 @@ const Login = () => {
         event.preventDefault();
 
         try {
-            const response = await axios.post("http://192.168.1.11:8080/login", {
+            const response = await axios.post("http://127.0.0.1:8080/login", {
                 email: email,
                 password: password
             }, { withCredentials: true });

@@ -8,7 +8,7 @@ const Snippet = ({ snippetId, backToProfile }) => {
     useEffect(() => {
         const fetchSnippet = async () => {
             try {
-                const response = await axios.get(`http://192.168.1.11:8080/snippet/get?id=${snippetId}`, { withCredentials: true });
+                const response = await axios.get(`http://127.0.0.1:8080/snippet/get?id=${snippetId}`, { withCredentials: true });
                 setSnippet(response.data.snippet);
             } catch (error) {
                 console.log("Error getting the snippet:", error);

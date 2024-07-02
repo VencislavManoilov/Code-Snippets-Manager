@@ -12,7 +12,7 @@ const Signup = () => {
         event.preventDefault();
 
         try {
-            const response = await axios.post("http://192.168.1.11:8080/signup", {
+            const response = await axios.post("http://127.0.0.1:8080/signup", {
                 name: name,
                 email: email,
                 password: password,
