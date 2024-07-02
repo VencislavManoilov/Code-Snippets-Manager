@@ -16,7 +16,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 const corsOptions = {
-    origin: 'http://192.168.1.11:3000',
+    origin: process.env.FRONTEND_URL || 'http://127.0.0.1:3000',
     credentials: true
 };
 
@@ -24,10 +24,10 @@ app.use(cors(corsOptions));
 
 // Configure MySQL connection
 const db = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: "Asdf1234567890",
-    database: 'code_snippets',
+    host: process.env.MYSQL_HOST || 'localhost',
+    user: process.env.MYSQL_USER || 'root',
+    password: process.env.MYSQL_PASSWORD || "Asdf1234567890",
+    database: process.env.MYSQL_DB || 'code_snippets',
     waitForConnections: true,
     connectionLimit: 10,
     queueLimit: 0
