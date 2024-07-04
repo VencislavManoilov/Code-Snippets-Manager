@@ -5,7 +5,10 @@ const User = ({isLoggedIn}) => {
     return (
         <div>
             {isLoggedIn ? (
-                <a className="d-flex link" href="/profile">{isLoggedIn.name}</a>
+                <div className="navbar">
+                    <button className="btn btn-success" style={{"margin-right": "30px"}}>Create</button>
+                    <a className="d-flex link" href="/profile">{isLoggedIn.name}</a>
+                </div>
             ) : (
                 <div>
                     <a href="/login" className="login link badge text-bg-primary">Login</a>

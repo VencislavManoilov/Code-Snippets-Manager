@@ -15,8 +15,10 @@ const Profile = (user) => {
             try {
                 const response = await axios.get("http://127.0.0.1:8080/snippet/ids", { withCredentials: true });
                 if(response.data) {
+                    setSnippetIds([]);
                     setSnippetIds(response.data.snippets);
                     console.log(response.data.snippets);
+                    setSnippets([]);
                     response.data.snippets.forEach(async (id) => {
                         await fetchSnippet(id);
                     });
