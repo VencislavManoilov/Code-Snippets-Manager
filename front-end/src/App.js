@@ -5,6 +5,7 @@ import Navbar from './components/Navbar';
 import Login from './components/Login';
 import Signup from './components/Signup';
 import Profile from './components/Profile';
+import Create from './components/Create';
 
 const InitComponent = ({ user }) => {
     return user ? (
@@ -46,6 +47,7 @@ function App() {
                 <Route path='/login' element={<Login />} />
                 <Route path='/signup' element={<Signup />} />
                 <Route path='/profile' element={<Profile user={user} />} />
+                <Route path='/create' element={<Create />} />
             </Routes>
         </Router>
     );
