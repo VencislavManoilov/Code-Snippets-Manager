@@ -24,6 +24,10 @@ route.post(
 
         const { title, code, type } = req.body;
 
+        if(!CheckType(type)) {
+            return res.status(400).json({ error: "Type not supported" });
+        }
+
         try {
             const query = `INSERT INTO snippets (user_id, title, code, type) VALUES (?, ?, ?, ?)`;
             const values = [req.session.userId, title, code, type];
@@ -34,7 +38,7 @@ route.post(
                     return res.status(500).json({ error: "Internal server error" });
                 }
 
-                return res.status(201).json({ success: "Snippet created successfully" });
+                return res.status(201).json({ id: result.insertId });
             });
         } catch (err) {
             console.error(err);
@@ -42,5 +46,18 @@ route.post(
         }
     }
 )
+
+function CheckType(type) {
+    switch (type) {
+        case 'js':
+            return true;
+        case 'cpp':
+            return true;
+        case 'cs':
+            return true;
+        default:
+        return false;
+    }
+}
 
 module.exports = route;
