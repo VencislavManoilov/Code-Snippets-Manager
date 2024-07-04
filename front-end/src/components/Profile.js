@@ -17,7 +17,6 @@ const Profile = (user) => {
                 if(response.data) {
                     setSnippetIds([]);
                     setSnippetIds(response.data.snippets);
-                    console.log(response.data.snippets);
                     setSnippets([]);
                     response.data.snippets.forEach(async (id) => {
                         await fetchSnippet(id);
@@ -99,7 +98,7 @@ const Profile = (user) => {
                     </div>
                 </>
             ) : (
-                <Snippet snippetId={currentSnippetId} backToProfile={backToProfile} />
+                <Snippet snippetId={currentSnippetId} backToProfileFunction={backToProfile} />
             )}
         </div>
     );

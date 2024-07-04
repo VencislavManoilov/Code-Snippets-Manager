@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./css/main.css";
 
-const Snippet = ({ snippetId, backToProfile }) => {
+const Snippet = ({ snippetId, backToProfileFunction }) => {
     const [snippet, setSnippet] = useState(null);
 
     useEffect(() => {
@@ -20,7 +20,7 @@ const Snippet = ({ snippetId, backToProfile }) => {
 
     return (
         <div className="container">
-            <button className="btn btn-secondary btn-block" type="button" onClick={backToProfile}>Back to Profile</button>
+            <button className="btn btn-secondary btn-block" type="button" onClick={backToProfileFunction}>Go to Profile</button>
             {snippet ? (
                 <div>
                     <h1>{snippet.title}</h1>

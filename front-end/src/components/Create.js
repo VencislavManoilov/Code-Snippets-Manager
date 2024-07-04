@@ -108,7 +108,7 @@ const Create = () => {
                 </div>
             </div>
         ) : (
-            <Snippet snippetId={snippetId} backToProfile={() => {setView("profile")}} />
+            <Snippet snippetId={snippetId} backToProfileFunction={() => {window.location.href="/profile"}} />
         )
         }
         </>
