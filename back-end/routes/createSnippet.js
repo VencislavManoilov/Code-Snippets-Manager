@@ -48,16 +48,29 @@ route.post(
 )
 
 function CheckType(type) {
-    switch (type) {
-        case 'js':
-            return true;
-        case 'cpp':
-            return true;
-        case 'cs':
-            return true;
-        default:
-        return false;
-    }
+    const validTypes = new Set([
+        'js', 'cpp', 'cs', 'java', 'py', 'rb', 'php', 'swift', 'go', 'rs', 
+        'kt', 'ts', 'scala', 'dart', 'lua', 'perl', 'asm', 'sh', 'r', 'm',
+        'vb', 'pl', 'clj', 'elixir', 'erlang', 'fsharp', 'groovy', 'haskell',
+        'julia', 'lisp', 'objc', 'pascal', 'prolog', 'rust', 'sql', 'vhdl',
+        'verilog', 'cobol', 'fortran', 'ada', 'tcl', 'awk', 'bash', 'zsh',
+        'matlab', 'sas', 'sml', 'scheme', 'forth', 'ml', 'ocaml', 'nim', 
+        'crystal', 'racket', 'red', 'rexx', 'vbnet', 'd', 'elm', 'idris',
+        'coffeescript', 'postscript', 'io', 'smalltalk', 'abc', 'algol', 
+        'apl', 'awk', 'bc', 'bliss', 'ch', 'csh', 'dcl', 'eiffel', 'forth',
+        'icon', 'idl', 'j', 'kotlin', 'logo', 'modula2', 'nemerle', 'occam', 
+        'opencl', 'plsql', 'pike', 'rex', 'rpg', 'simula', 'snobol', 'sparc',
+        'spiral', 'sqf', 'stata', 'supercollider', 'systemverilog', 'vba',
+        'vimscript', 'wren', 'xojo', 'yacc', 'zpl', 'actionscript', 'ampl',
+        'antlr', 'awk', 'bcpl', 'boo', 'caml', 'clarion', 'clojure', 'cython',
+        'dylan', 'ecmascript', 'esolang', 'factor', 'fscript', 'gams', 'gap',
+        'gml', 'haxe', 'io', 'jacl', 'janet', 'kornshell', 'livecode', 'maple',
+        'max', 'mercury', 'mumps', 'newlisp', 'nusmv', 'opal', 'picat', 'povray',
+        'promela', 'puppet', 'pure', 'purescript', 'q', 'quil', 'rebol', 'sed',
+        'smlnj', 'spark', 'turing', 'vala', 'verilog', 'vhdl', 'whiley', 'x10',
+        'xtend', 'yacas', 'yorick', 'zimbu', 'zig'
+    ]);
+    return validTypes.has(type);
 }
 
 module.exports = route;
