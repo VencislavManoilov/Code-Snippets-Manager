@@ -9,7 +9,10 @@ import Create from './components/Create';
 
 const InitComponent = ({ user }) => {
     return user ? (
-        <h2>Welcome</h2>
+        <div className='container'>
+            <h2 className='mt-5'>Welcome back!</h2>
+            <Create />
+        </div>
     ) : (
         <h3 className='text-center mt-5'>You need to <Link to="/login">login</Link></h3>
     );
