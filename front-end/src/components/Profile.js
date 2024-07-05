@@ -98,7 +98,7 @@ const Profile = (user) => {
                     </div>
                 </>
             ) : (
-                <Snippet snippetId={currentSnippetId} backToProfileFunction={backToProfile} />
+                <Snippet snippetId={currentSnippetId} hasBackButton={true} backToProfileFunction={backToProfile} />
             )}
         </div>
     );

@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Link, useLocation } from 'react-router-dom';
 import axios from "axios";
 import Navbar from './components/Navbar';
 import Login from './components/Login';
 import Signup from './components/Signup';
 import Profile from './components/Profile';
 import Create from './components/Create';
+import Snippet from './components/Snippet';
 
 const InitComponent = ({ user }) => {
     return user ? (
@@ -51,9 +52,18 @@ function App() {
                 <Route path='/signup' element={<Signup />} />
                 <Route path='/profile' element={<Profile user={user} />} />
                 <Route path='/create' element={<Create />} />
+                <Route path='/snippet' element={<SnippetWrapper />} />
             </Routes>
         </Router>
     );
 }
+
+const SnippetWrapper = () => {
+    const location = useLocation();
+    const params = new URLSearchParams(location.search);
+    const id = params.get('id');
+
+    return <Snippet snippetId={id} hasBackButton={false} backToProfileFunction={() => {}} />;
+};
 
 export default App;

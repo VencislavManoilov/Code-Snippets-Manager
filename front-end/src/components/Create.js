@@ -122,7 +122,7 @@ const Create = () => {
                 </div>
             </div>
         ) : (
-            <Snippet snippetId={snippetId} backToProfileFunction={() => {window.location.href="/profile"}} />
+            <Snippet snippetId={snippetId} hasBackButton={true} backToProfileFunction={() => {window.location.href="/profile"}} />
         )
         }
         </>
