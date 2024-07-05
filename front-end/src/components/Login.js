@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-const URL = process.env.REACT_APP_API_URL;
-
 const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -12,13 +10,12 @@ const Login = () => {
         event.preventDefault();
 
         try {
-            const response = await axios.post(`${URL}/login`, {
+            const response = await axios.post("/api/login", {
                 email: email,
                 password: password
             }, { withCredentials: true });
 
             window.location.href = "/";
-            // Handle successful login (e.g., store token, redirect)
         } catch (error) {
             console.error("Login failed:", error);
             setError("Login failed. Please check your email and password.");

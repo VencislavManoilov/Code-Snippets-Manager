@@ -11,6 +11,9 @@ const isAuthenticated = require("./middleware/isAuthenticated");
 
 const PORT = 8080;
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
 // Configure MySQL connection
 const db = mysql.createConnection({
     host: process.env.MYSQL_HOST || 'localhost',
@@ -37,18 +40,6 @@ const sessionStore = new MySQLStore({
     endConnectionOnClose: false // Keep the connection open for session store
 }, db.promise());
 
-
-const corsOptions = {
-    origin: ['http://127.0.0.1:3000', 'http://192.168.1.11:3000'],
-    credentials: true, // Allow credentials (cookies)
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    allowedHeaders: 'Content-Type, Authorization'
-};
-app.use(cors(corsOptions));
-
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-
 // Session middleware setup
 app.use(session({
     key: 'session_cookie_name',
@@ -58,10 +49,17 @@ app.use(session({
     saveUninitialized: false,
     cookie: {
         maxAge: 1000 * 60 * 60 * 24, // 1 day
-        secure: false, // Set to true if using HTTPS
-        sameSite: 'None' // Adjust as per your security requirements
+        secure: false,
+        httpOnly: true
     }
 }));
+
+const corsOptions = {
+    origin: 'http://localhost:3000',
+    credentials: true,
+};
+
+app.use(cors(corsOptions));
 
 app.get("/", (req, res) => {
     res.status(200).json({

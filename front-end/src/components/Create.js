@@ -2,8 +2,6 @@ import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import Snippet from "./Snippet";
 
-const URL = process.env.REACT_APP_API_URL;
-
 const validTypes = new Set([
     'js', 'cpp', 'cs', 'java', 'py', 'rb', 'php', 'swift', 'go', 'rs', 
     'kt', 'ts', 'scala', 'dart', 'lua', 'perl', 'asm', 'sh', 'r', 'm',
@@ -83,7 +81,7 @@ const Create = () => {
         }
 
         try {
-            const response = await axios.post(`${URL}/snippet/create`, {
+            const response = await axios.post("/api/snippet/create", {
                 title: title,
                 code: code,
                 type: type
