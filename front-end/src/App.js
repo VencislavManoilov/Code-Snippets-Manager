@@ -31,7 +31,7 @@ function App() {
     
     const checkLoginStatus = async () => {
         try {
-            const response = await axios.get(`${URL}/user`, { withCredentials: true });
+            const response = await axios.get(`http://192.168.1.11:8080/user`, { withCredentials: true });
             if (response.data) {
                 setUser(response.data.user);
                 setLoading(false);
