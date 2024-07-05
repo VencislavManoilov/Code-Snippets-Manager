@@ -8,6 +8,8 @@ import Profile from './components/Profile';
 import Create from './components/Create';
 import Snippet from './components/Snippet';
 
+const URL = process.env.REACT_APP_API_URL;
+
 const InitComponent = ({ user }) => {
     return user ? (
         <div className='container'>
@@ -29,7 +31,7 @@ function App() {
     
     const checkLoginStatus = async () => {
         try {
-            const response = await axios.get("http://127.0.0.1:8080/user", { withCredentials: true });
+            const response = await axios.get(`${URL}/user`, { withCredentials: true });
             if (response.data) {
                 setUser(response.data.user);
                 setLoading(false);

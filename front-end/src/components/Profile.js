@@ -4,6 +4,8 @@ import axios from "axios";
 import "./css/main.css";
 import Snippet from "./Snippet";
 
+const URL = process.env.REACT_APP_API_URL;
+
 const Profile = (user) => {
     const [snippetIds, setSnippetIds] = useState([]);
     const [snippets, setSnippets] = useState([]);
@@ -13,7 +15,7 @@ const Profile = (user) => {
     useEffect(() => {
         const fetchSnippetIds = async () => {
             try {
-                const response = await axios.get("http://127.0.0.1:8080/snippet/ids", { withCredentials: true });
+                const response = await axios.get(`${URL}/snippet/ids`, { withCredentials: true });
                 if(response.data) {
                     setSnippetIds([]);
                     setSnippetIds(response.data.snippets);
@@ -29,7 +31,7 @@ const Profile = (user) => {
 
         const fetchSnippet = async (id) => {
             try {
-                const response = await axios.get(`http://127.0.0.1:8080/snippet/get?id=${id}`, { withCredentials: true });
+                const response = await axios.get(`${URL}/snippet/get?id=${id}`, { withCredentials: true });
                 setSnippets((prevSnippets) => [...prevSnippets, response.data.snippet]);
             } catch(error) {
                 console.log("Error getting the snippet:", error);
@@ -41,7 +43,7 @@ const Profile = (user) => {
 
     const logout = async () => {
         try {
-            const response = await axios.get("http://127.0.0.1:8080/logout", { withCredentials: true });
+            const response = await axios.get(`${URL}/logout`, { withCredentials: true });
             window.location.href = "/";
         } catch (error) {
             console.log("Error logging out:", error);
