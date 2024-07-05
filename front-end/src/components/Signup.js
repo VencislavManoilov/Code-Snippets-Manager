@@ -19,7 +19,9 @@ const Signup = () => {
                 age: age
             }, { withCredentials: true });
 
-            window.location.href = "/login";
+            if(response) {
+                window.location.href = "/login";
+            }
             // Handle successful login (e.g., store token, redirect)
         } catch (error) {
             console.error("Login failed:", error);

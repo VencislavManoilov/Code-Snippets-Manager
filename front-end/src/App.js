@@ -23,6 +23,8 @@ function App() {
     const [user, setUser] = useState(false);
     const [loading, setLoading] = useState(true);
 
+    console.log(process.env.REACT_APP_BACKEND_URL);
+
     useEffect(() => {
         checkLoginStatus();
     }, []);

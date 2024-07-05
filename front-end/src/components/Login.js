@@ -15,7 +15,10 @@ const Login = () => {
                 password: password
             }, { withCredentials: true });
 
-            window.location.href = "/";
+            if(response) {
+                window.location.href = "/";
+            }
+
         } catch (error) {
             console.error("Login failed:", error);
             setError("Login failed. Please check your email and password.");

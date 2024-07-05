@@ -42,7 +42,9 @@ const Profile = (user) => {
     const logout = async () => {
         try {
             const response = await axios.get("/api/logout", { withCredentials: true });
-            window.location.href = "/";
+            if(response) {
+                window.location.href = "/";
+            }
         } catch (error) {
             console.log("Error logging out:", error);
         }

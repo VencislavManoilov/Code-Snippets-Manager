@@ -102,7 +102,7 @@ const Create = () => {
         <>
         {view === "page" ? (
             <div className="container mt-5">
-                <div id="error" style={{display: 'none', position: 'sticky'}} className="alert alert-danger alert-dismissible fade show" role="danger">
+                <div id="error" style={{display: 'none', position: 'sticky'}} className="alert alert-danger alert-dismissible fade show">
                     The fields are not filled!
                     <button type="button" className="btn-close" onClick={() => {document.getElementById("error").style.display = "none"}}></button>
                 </div>
