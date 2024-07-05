@@ -16,9 +16,21 @@ In this website, you can paste your code snippet and share it with anyone!
 - <img src="https://skillicons.dev/icons?i=mysql" width="24"> **MySQL**
 
 ## How to start it
-1. If you don't have Docker, you need to install it
-2. Open the terminal from the project directory and run the following commands:
-   -`docker-compose up --build`
-3. When it is done stop the back-end container from running
-4. Run the back-end container
-5. Now you can access it on [http://127.0.0.1:3000](http://127.0.0.1:3000)
+### Using Docker
+1. Open the terminal from the project directory and run `docker-compose up --build`
+2. When it is done stop the back-end container from running
+3. Run the back-end container
+4. Now you can access it on [http://localhost:3000](http://localhost:3000)
+
+### Using npm
+1. In the terminal of `back-end` run the following commands:
+   - `npm install`
+   - `npm start`
+2. In the terminal of `front-end` run the following commands:
+   - `npm install`
+   - `npm run build`
+   - `serve -s build`
+   - `npm run build`
+3. If you want to edit it and see it in real time instead do:
+   - `npm install`
+   - `npm start`
