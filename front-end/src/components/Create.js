@@ -35,10 +35,36 @@ const Create = () => {
     const [snippetId, setId] = useState();
     const textareaRef = useRef(null);
 
+    useEffect(() => {
+        const textarea = textareaRef.current;
+
+        const handleTabPress = (event) => {
+            if (event.key === 'Tab') {
+                event.preventDefault();
+                const start = textarea.selectionStart;
+                const end = textarea.selectionEnd;
+
+                // Set textarea value to: text before caret + tab + text after caret
+                textarea.value = textarea.value.substring(0, start) + "\t" + textarea.value.substring(end);
+
+                // Put caret at right position again
+                textarea.selectionStart = textarea.selectionEnd = start + 1;
+
+                // Adjust the height of the textarea
+                updateTextarea();
+            }
+        };
+
+        textarea.addEventListener('keydown', handleTabPress);
+
+        return () => {
+            textarea.removeEventListener('keydown', handleTabPress);
+        };
+    }, []);
+
     const updateTextarea = () => {
         const textarea = textareaRef.current;
         textarea.style.overflow = 'hidden';
-        textarea.style.height = 'auto';
         textarea.style.height = textarea.scrollHeight + "px";
     };
 
@@ -64,6 +90,8 @@ const Create = () => {
             }, { withCredentials: true });
 
             setId(response.data.id);
+
+            window.location.href = `/snippet?id=${response.data.id}`;
             setView("snippet");
         } catch(error) {
             document.getElementById("error").textContent = "Something went wrong ";
@@ -99,7 +127,8 @@ const Create = () => {
                         ref={textareaRef}
                         value={code}
                         onChange={(e) => setCode(e.target.value)}
-                        onKeyUp={updateTextarea}
+                        onInput={updateTextarea}
+                        style={{ overflow: 'hidden', resize: 'none' }}
                     />
                 </div>
     

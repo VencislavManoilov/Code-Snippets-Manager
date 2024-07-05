@@ -27,14 +27,15 @@ const Snippet = ({ snippetId, hasBackButton, backToProfileFunction }) => {
     }, [snippet]);
 
     return (
-        <div className="container">
+        <div className="container mt-5">
             {hasBackButton ? (
                 <button className="btn btn-secondary btn-block" type="button" onClick={backToProfileFunction}>Go to Profile</button>
             ) : (<></>)}
             {snippet ? (
-                <div>
+                <div className="mt-3">
                     <h1>{snippet.title}</h1>
                     <pre><code className={"language-"+snippet.type}>{snippet.code}</code></pre>
+                    <span className="h4">Type: <span className="badge text-bg-secondary">{snippet.type}</span></span>
                 </div>
             ) : (
                 <p>Loading snippet...</p>
