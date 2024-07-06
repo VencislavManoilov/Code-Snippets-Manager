@@ -23,9 +23,14 @@ function App() {
     const [user, setUser] = useState(false);
     const [loading, setLoading] = useState(true);
 
-    console.log(process.env.REACT_APP_BACKEND_URL);
-
-    useEffect(() => {
+    
+    useEffect(async () => {
+        try {
+            const response = await axios.get("/api/");
+            console.log(response);
+        } catch(error) {
+            console.log(error);
+        }
         checkLoginStatus();
     }, []);
     

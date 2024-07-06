@@ -19,6 +19,8 @@ services:
     frontend:
         build:
             context: ./front-end
+            args:
+                - REACT_APP_BACKEND_URL=http://backend:8080
         ports:
             - "3000:3000"
         networks:
@@ -42,7 +44,6 @@ services:
 
 networks:
     app-network:
-        driver: bridge
 
 volumes:
     mysql-data:
