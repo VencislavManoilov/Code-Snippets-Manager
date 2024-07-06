@@ -1,18 +1,11 @@
 const { createProxyMiddleware } = require('http-proxy-middleware');
 
-const target = process.env.REACT_APP_BACKEND_API || "http://localhost:8080";
-console.log('Proxying to:', target);
-
 module.exports = function(app) {
     app.use(
-        '/api',
+        '/api', // Your backend routes that start with /api
         createProxyMiddleware({
-            target: target,
+            target: 'http://backend:8080', // Your backend server URL
             changeOrigin: true,
-            logLevel: 'debug',
-            onProxyReq: (proxyReq, req, res) => {
-                console.log('Proxying request:', req.url);
-            },
         })
     );
 };
