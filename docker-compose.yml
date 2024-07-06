@@ -14,7 +14,7 @@ services:
         depends_on:
             - mysql
         networks:
-            - app-network
+            - my-network
 
     frontend:
         build:
@@ -24,7 +24,7 @@ services:
         ports:
             - "3000:3000"
         networks:
-            - app-network
+            - my-network
         environment:
             - REACT_APP_BACKEND_URL=http://backend:8080
 
@@ -40,10 +40,11 @@ services:
             - mysql-data:/var/lib/mysql
             - ./mysql-init:/docker-entrypoint-initdb.d
         networks:
-            - app-network
+            - my-network
 
 networks:
-    app-network:
+    my-network:
+        driver: bridge
 
 volumes:
     mysql-data:

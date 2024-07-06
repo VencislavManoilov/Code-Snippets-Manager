@@ -25,18 +25,12 @@ function App() {
 
     
     useEffect(async () => {
-        try {
-            const response = await axios.get("/api/");
-            console.log(response);
-        } catch(error) {
-            console.log(error);
-        }
         checkLoginStatus();
     }, []);
     
     const checkLoginStatus = async () => {
         try {
-            const response = await axios.get(`/api/user`, { withCredentials: true });
+            const response = await axios.get("http://localhost:8080/user", { withCredentials: true });
             if (response.data) {
                 setUser(response.data.user);
                 setLoading(false);
