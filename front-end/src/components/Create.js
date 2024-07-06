@@ -81,7 +81,7 @@ const Create = () => {
         }
 
         try {
-            const response = await axios.post("/api/snippet/create", {
+            const response = await axios.post("http://localhost:8080/snippet/create", {
                 title: title,
                 code: code,
                 type: type

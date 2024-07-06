@@ -7,7 +7,6 @@ import Signup from './components/Signup';
 import Profile from './components/Profile';
 import Create from './components/Create';
 import Snippet from './components/Snippet';
-import apiClient from './apiClient';
 
 const InitComponent = ({ user }) => {
     return user ? (
@@ -31,7 +30,7 @@ function App() {
     
     const checkLoginStatus = async () => {
         try {
-            const response = await apiClient.get("http://localhost:8080/user");
+            const response = await axios.get("http://localhost:8080/user", { withCredentials: true });
             if (response.data) {
                 setUser(response.data.user);
                 setLoading(false);

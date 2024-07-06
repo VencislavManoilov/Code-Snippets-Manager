@@ -10,7 +10,7 @@ const Snippet = ({ snippetId, hasBackButton, backToProfileFunction }) => {
     useEffect(() => {
         const fetchSnippet = async () => {
             try {
-                const response = await axios.get(`/api/snippet/get?id=${snippetId}`);
+                const response = await axios.get(`http://localhost:8080/snippet/get?id=${snippetId}`);
                 setSnippet(response.data.snippet);
             } catch (error) {
                 console.log("Error getting the snippet:", error);

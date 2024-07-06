@@ -13,7 +13,7 @@ const Profile = (user) => {
     useEffect(() => {
         const fetchSnippetIds = async () => {
             try {
-                const response = await axios.get("/api/snippet/ids", { withCredentials: true });
+                const response = await axios.get("http://localhost:8080/snippet/ids", { withCredentials: true });
                 if(response.data) {
                     setSnippetIds([]);
                     setSnippetIds(response.data.snippets);
@@ -29,7 +29,7 @@ const Profile = (user) => {
 
         const fetchSnippet = async (id) => {
             try {
-                const response = await axios.get(`/api/snippet/get?id=${id}`, { withCredentials: true });
+                const response = await axios.get(`http://localhost:8080/snippet/get?id=${id}`, { withCredentials: true });
                 setSnippets((prevSnippets) => [...prevSnippets, response.data.snippet]);
             } catch(error) {
                 console.log("Error getting the snippet:", error);
@@ -41,7 +41,7 @@ const Profile = (user) => {
 
     const logout = async () => {
         try {
-            const response = await axios.get("/api/logout", { withCredentials: true });
+            const response = await axios.get("http://localhost:8080/logout", { withCredentials: true });
             if(response) {
                 window.location.href = "/";
             }
