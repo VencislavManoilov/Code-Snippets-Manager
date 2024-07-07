@@ -8,6 +8,8 @@ import Profile from './components/Profile';
 import Create from './components/Create';
 import Snippet from './components/Snippet';
 
+const URL = process.env.REACT_APP_BACKEND_URL || process.env.REACT_APP_CUSTOM_BACKEND_URL || "http://localhost:8080";
+
 const InitComponent = ({ user }) => {
     return user ? (
         <div className='container'>
@@ -22,15 +24,14 @@ const InitComponent = ({ user }) => {
 function App() {
     const [user, setUser] = useState(false);
     const [loading, setLoading] = useState(true);
-
     
     useEffect(async () => {
         checkLoginStatus();
     }, []);
-    
+
     const checkLoginStatus = async () => {
         try {
-            const response = await axios.get("http://localhost:8080/user", { withCredentials: true });
+            const response = await axios.get(URL+"/user", { withCredentials: true });
             if (response.data) {
                 setUser(response.data.user);
                 setLoading(false);

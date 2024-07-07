@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import Snippet from "./Snippet";
 
+const URL = process.env.REACT_APP_BACKEND_URL || process.env.REACT_APP_CUSTOM_BACKEND_URL || "http://localhost:8080";
+
 const validTypes = new Set([
     'js', 'cpp', 'cs', 'java', 'py', 'rb', 'php', 'swift', 'go', 'rs', 
     'kt', 'ts', 'scala', 'dart', 'lua', 'perl', 'asm', 'sh', 'r', 'm',
@@ -81,7 +83,7 @@ const Create = () => {
         }
 
         try {
-            const response = await axios.post("http://localhost:8080/snippet/create", {
+            const response = await axios.post(URL+"/snippet/create", {
                 title: title,
                 code: code,
                 type: type

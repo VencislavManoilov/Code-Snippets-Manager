@@ -4,13 +4,15 @@ import "./css/main.css";
 import hljs from 'highlight.js';
 import 'highlight.js/styles/monokai-sublime.css';
 
+const URL = process.env.REACT_APP_BACKEND_URL || process.env.REACT_APP_CUSTOM_BACKEND_URL || "http://localhost:8080";
+
 const Snippet = ({ snippetId, hasBackButton, backToProfileFunction }) => {
     const [snippet, setSnippet] = useState(null);
 
     useEffect(() => {
         const fetchSnippet = async () => {
             try {
-                const response = await axios.get(`http://localhost:8080/snippet/get?id=${snippetId}`);
+                const response = await axios.get(URL+"/snippet/get?id=" + snippetId);
                 setSnippet(response.data.snippet);
             } catch (error) {
                 console.log("Error getting the snippet:", error);

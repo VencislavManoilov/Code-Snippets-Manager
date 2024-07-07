@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 
+const URL = process.env.REACT_APP_BACKEND_URL || process.env.REACT_APP_CUSTOM_BACKEND_URL || "http://localhost:8080";
+
 const Signup = () => {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
@@ -12,7 +14,7 @@ const Signup = () => {
         event.preventDefault();
 
         try {
-            const response = await axios.post("http://localhost:8080/signup", {
+            const response = await axios.post(URL+"/signup", {
                 name: name,
                 email: email,
                 password: password,
