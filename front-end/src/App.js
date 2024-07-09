@@ -25,21 +25,21 @@ function App() {
     const [user, setUser] = useState(false);
     const [loading, setLoading] = useState(true);
     
-    useEffect(async () => {
-        checkLoginStatus();
-    }, []);
-
-    const checkLoginStatus = async () => {
-        try {
-            const response = await axios.get(URL+"/user", { withCredentials: true });
-            if (response.data) {
-                setUser(response.data.user);
+    useEffect(() => {
+        const checkLoginStatus = async () => {
+            try {
+                const response = await axios.get(URL+"/user", { withCredentials: true });
+                if (response.data) {
+                    setUser(response.data.user);
+                    setLoading(false);
+                }
+            } catch (error) {
                 setLoading(false);
             }
-        } catch (error) {
-            setLoading(false);
         }
-    }
+        
+        checkLoginStatus();
+    }, []);
 
     if (loading) {
         return <div>Loading...</div>;
