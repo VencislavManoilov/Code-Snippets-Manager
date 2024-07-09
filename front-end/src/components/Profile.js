@@ -69,7 +69,13 @@ const Profile = (user) => {
         <div className="container">
             {view === "profile" ? (
                 <>
-                    <div className="row mt-5 justify-content-between">
+                    <div className="row mt-4">
+                        <div className="col-auto">
+                            <button className="btn btn-secondary btn-block" type="button" onClick={back}>Back</button>
+                        </div>
+                    </div>
+
+                    <div className="row mt-3 justify-content-between">
                         <h1 className="col-auto">{user.user.name}</h1>
                         <button className="col-auto btn btn-danger btn-block" type="button" style={{height: "40px", marginTop: "10px"}} onClick={logout}>Logout</button>
                     </div>
@@ -80,26 +86,20 @@ const Profile = (user) => {
                         <div className="row mt-5">
                             <h3>Snippets:</h3>
                             {snippets.map((snippet, index) => (
-                                <button
+                                <a
                                     key={index}
-                                    type="button"
-                                    className="btn btn-outline-primary text-left"
-                                    style={{ textAlign: "left" }}
+                                    className="text-left"
+                                    style={{ textAlign: "left", fontSize: "22px", cursor: "pointer", marginLeft: "15px" }}
                                     onClick={() => handleSnippetClick(snippetIds[index])}
                                 >
                                     {snippet.title}
-                                </button>
+                                    <span className="badge text-bg-secondary" style={{marginLeft: "10px"}}>{snippet.type}</span>
+                                </a>
                             ))}
                         </div>
                     ) : (
                         <p>No snippets found.</p>
                     )}
-
-                    <div className="row mt-5">
-                        <div className="col-auto">
-                            <button className="btn btn-secondary btn-block" type="button" onClick={back}>Back</button>
-                        </div>
-                    </div>
                 </>
             ) : (
                 <Snippet snippetId={currentSnippetId} hasBackButton={true} backToProfileFunction={backToProfile} />
