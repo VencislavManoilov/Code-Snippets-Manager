@@ -69,7 +69,10 @@ const Profile = (user) => {
         <div className="container">
             {view === "profile" ? (
                 <>
-                    <h1 className="col mt-5">{user.user.name}</h1>
+                    <div className="row mt-5 justify-content-between">
+                        <h1 className="col-auto">{user.user.name}</h1>
+                        <button className="col-auto btn btn-danger btn-block" type="button" style={{height: "40px", marginTop: "10px"}} onClick={logout}>Logout</button>
+                    </div>
                     <h3 className="col">email: {user.user.email}</h3>
                     <h3 className="col">age: {user.user.age}</h3>
 
@@ -95,9 +98,6 @@ const Profile = (user) => {
                     <div className="row mt-5">
                         <div className="col-auto">
                             <button className="btn btn-secondary btn-block" type="button" onClick={back}>Back</button>
-                        </div>
-                        <div className="col-auto">
-                            <button className="btn btn-danger btn-block" type="button" onClick={logout}>Logout</button>
                         </div>
                     </div>
                 </>
