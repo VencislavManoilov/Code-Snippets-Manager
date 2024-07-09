@@ -1,11 +1,11 @@
 const express = require("express");
 const route = express.Router();
-const { query, validationResult } = require("express-validator");
+const { body, validationResult } = require("express-validator");
 
 route.get(
     "/",
     [
-        query("id").notEmpty().withMessage("Id is required")
+        body("id").notEmpty().withMessage("Id is required")
     ],
     (req, res) => {
         // Check for validation errors
@@ -18,7 +18,7 @@ route.get(
             return res.status(400).json({ errors: errorMessages });
         }
 
-        const { id } = req.query;
+        const { id } = req.body;
 
         try {
             const query = "SELECT * FROM snippets WHERE id = ?";
