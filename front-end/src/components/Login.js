@@ -46,6 +46,7 @@ const Login = () => {
                                         required
                                     />
                                 </div>
+
                                 <div className="form-group mt-2">
                                     <label htmlFor="password">Password</label>
                                     <input
@@ -56,7 +57,12 @@ const Login = () => {
                                         required
                                     />
                                 </div>
-                                <button type="submit" className="btn btn-primary mt-3">Login</button>
+
+                                <div className="mt-2">Don't have an account! <a href="/signup">Register</a></div>
+
+                                <div className="col-12 text-end">
+                                    <button type="submit" className="btn btn-primary mt-3">Login</button>
+                                </div>
                             </form>
                         </div>
                     </div>

@@ -49,6 +49,7 @@ const Signup = () => {
                                         required
                                     />
                                 </div>
+
                                 <div className="form-group mt-2">
                                     <label htmlFor="email">Email address</label>
                                     <input
@@ -59,6 +60,7 @@ const Signup = () => {
                                         required
                                     />
                                 </div>
+
                                 <div className="form-group mt-2">
                                     <label htmlFor="password">Password</label>
                                     <input
@@ -69,6 +71,7 @@ const Signup = () => {
                                         required
                                     />
                                 </div>
+
                                 <div className="form-group mt-2">
                                     <label htmlFor="number">Age</label>
                                     <input
@@ -78,7 +81,12 @@ const Signup = () => {
                                         required
                                     />
                                 </div>
-                                <button type="submit" className="btn btn-primary mt-3">Signup</button>
+
+                                <div className="mt-2">Already have an account! <a href="/login">Login</a></div>
+
+                                <div className="col-12 text-end">
+                                    <button type="submit" className="btn btn-primary mt-3">Signup</button>
+                                </div>
                             </form>
                         </div>
                     </div>
