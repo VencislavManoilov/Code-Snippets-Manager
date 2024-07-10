@@ -93,7 +93,7 @@ const Profile = (user) => {
                                     onClick={() => handleSnippetClick(snippetIds[index])}
                                 >
                                     {snippet.title}
-                                    <span className="badge text-bg-secondary" style={{marginLeft: "10px"}}>{snippet.type}</span>
+                                    <span className="badge fw-normal text-bg-dark">{snippet.type}</span>
                                 </a>
                             ))}
                         </div>
