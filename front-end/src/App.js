@@ -1,34 +1,36 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes, Link, useLocation } from 'react-router-dom';
 import axios from "axios";
-import Navbar from './components/Navbar';
-import Login from './components/Login';
-import Signup from './components/Signup';
-import Profile from './components/Profile';
-import Create from './components/Create';
-import Snippet from './components/Snippet';
-import Footer from './components/Footer';
+import Navbar from "./components/Navbar";
+import Login from "./components/Login";
+import Signup from "./components/Signup";
+import Profile from "./components/Profile";
+import Create from "./components/Create";
+import Snippet from "./components/Snippet";
+import Footer from "./components/Footer";
+import "./components/css/app.css";
 
 const URL = process.env.REACT_APP_BACKEND_URL || process.env.REACT_APP_CUSTOM_BACKEND_URL || "http://localhost:8080";
 
 const InitComponent = ({ user }) => {
     return user ? (
-        <div className='container'>
-            <h2 className='mt-5'>Welcome back!</h2>
+        <div className="container">
+            <h2 className="mt-5">Welcome back!</h2>
             <Create />
         </div>
     ) : (
-        <div className='container mt-5 text-center'>
+        <div className="container-fluid mt-5 text-center">
             <section id="hero">
-                <p className='h1'>Effortlessly Save, Share, and Manage Your Code Snippets</p>
-                <p className='h5 fw-normal mt-4'>Join thousands of developers who use our tool to boost their productivity. <a href="/signup">Sign Up</a></p>
+                <p className="h1">Effortlessly Save, Share, and Manage Your Code Snippets</p>
+                <p className="h5 fw-normal mt-4">Join thousands of developers who use our tool to boost their productivity. <a className="btn btn-success" href="/signup">Sign Up</a></p>
             </section>
 
-            <h2 className='mt-5'>Features</h2>
-            <section className='row gy-3 mt-2'>
+            <section id="features" className="row gy-3 mt-5">
+                <h2>Features</h2>
+
                 <div className="feature">
                     <h4>🎨 Syntax Highlighting</h4>
-                    <p>Supports multiple programming languages.</p>
+                    <p>Supports 156 different languages.</p>
                 </div>
 
                 <div className="feature">
