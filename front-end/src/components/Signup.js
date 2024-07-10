@@ -25,9 +25,16 @@ const Signup = () => {
                 window.location.href = "/login";
             }
             // Handle successful login (e.g., store token, redirect)
-        } catch (error) {
-            console.error("Login failed:", error);
-            setError("Login failed. Please check your email and password.");
+        } catch (err) {
+            if(err.response.data.errors) {
+                let msg = "";
+                for(let i = 0; i < err.response.data.errors.length; i++) {
+                    msg += err.response.data.errors[i] + "\n";
+                }
+                setError(msg.replace(/\n/g, '<br>'));
+            } else {
+                setError((err.response.data.error) ? err.response.data.error : "Signup failed! Please check your information");
+            }
         }
     };
 
@@ -38,7 +45,7 @@ const Signup = () => {
                     <div className="card">
                         <div className="card-header">Signup</div>
                         <div className="card-body">
-                            {error && <div className="alert alert-danger">{error}</div>}
+                            {error && <div className="alert alert-danger" dangerouslySetInnerHTML={{ __html: error }}></div>}
                             <form onSubmit={handleSubmit}>
                                 <div className="form-group">
                                     <label htmlFor="text">Name</label>

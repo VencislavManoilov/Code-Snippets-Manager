@@ -21,9 +21,16 @@ const Login = () => {
                 window.location.href = "/";
             }
 
-        } catch (error) {
-            console.error("Login failed:", error);
-            setError("Login failed. Please check your email and password.");
+        } catch (err) {
+            if(err.response.data.errors) {
+                let msg = "";
+                for(let i = 0; i < err.response.data.errors.length; i++) {
+                    msg += err.response.data.errors[i] + "\n";
+                }
+                setError(msg.replace(/\n/g, '<br>'));
+            } else {
+                setError((err.response.data.error) ? err.response.data.error : "Login failed! Please check your information");
+            }
         }
     };
 
@@ -34,7 +41,7 @@ const Login = () => {
                     <div className="card">
                         <div className="card-header">Login</div>
                         <div className="card-body">
-                            {error && <div className="alert alert-danger">{error}</div>}
+                            {error && <div className="alert alert-danger" dangerouslySetInnerHTML={{ __html: error }}></div>}
                             <form onSubmit={handleSubmit}>
                                 <div className="form-group">
                                     <label htmlFor="email">Email address</label>
