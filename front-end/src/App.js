@@ -7,6 +7,7 @@ import Signup from './components/Signup';
 import Profile from './components/Profile';
 import Create from './components/Create';
 import Snippet from './components/Snippet';
+import Footer from './components/Footer';
 
 const URL = process.env.REACT_APP_BACKEND_URL || process.env.REACT_APP_CUSTOM_BACKEND_URL || "http://localhost:8080";
 
@@ -17,7 +18,30 @@ const InitComponent = ({ user }) => {
             <Create />
         </div>
     ) : (
-        <h3 className='text-center mt-5'>You need to <Link to="/login">login</Link></h3>
+        <div className='container mt-5 text-center'>
+            <section id="hero">
+                <p className='h1'>Effortlessly Save, Share, and Manage Your Code Snippets</p>
+                <p className='h5 fw-normal mt-4'>Join thousands of developers who use our tool to boost their productivity. <a href="/signup">Sign Up</a></p>
+            </section>
+
+            <h2 className='mt-5'>Features</h2>
+            <section className='row gy-3 mt-2'>
+                <div className="feature">
+                    <h4>🎨 Syntax Highlighting</h4>
+                    <p>Supports multiple programming languages.</p>
+                </div>
+
+                <div className="feature">
+                    <h4>🔁 Share</h4>
+                    <p>Use QR code or URL to share your snippet to anyone!</p>
+                </div>
+
+                <div className="feature">
+                    <h4>✏️ Edit</h4>
+                    <p>Coming soon!</p>
+                </div>
+            </section>
+        </div>
     );
 };
 
@@ -56,6 +80,7 @@ function App() {
                 <Route path='/create' element={<Create />} />
                 <Route path='/snippet' element={<SnippetWrapper />} />
             </Routes>
+            <Footer />
         </Router>
     );
 }
