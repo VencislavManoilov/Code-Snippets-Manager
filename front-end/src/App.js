@@ -16,7 +16,9 @@ const InitComponent = ({ user }) => {
     return user ? (
         <div className="container">
             <h2 className="mt-5">Welcome back!</h2>
-            <Create />
+            <div className='mt-5' style={{backgroundColor: "rgba(0, 0, 0, 0.15)", border: "2px solid rgba(0, 0, 0, 0.3)", borderRadius: "20px"}}>
+                <Create />
+            </div>
         </div>
     ) : (
         <div className="container-fluid mt-5 text-center">
