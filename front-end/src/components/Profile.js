@@ -80,30 +80,45 @@ const Profile = (user) => {
                         </div>
                     </div>
 
-                    <div className="row mt-3 justify-content-between">
-                        <h1 className="col-auto">{user.user.name}</h1>
-                        <button className="col-auto btn btn-danger btn-block" type="button" style={{height: "40px", marginTop: "10px"}} onClick={logout}>Logout</button>
+                    <div className="row mt-5 justify-content-center">
+                        <div className="col-12 col-md-8 text-center">
+                            <div className="card p-4 shadow">
+                                <h1 className="card-title display-4 mb-3">{user.user.name}</h1>
+                                <p className="card-text lead"><strong>Email:</strong> {user.user.email}</p>
+                                <p className="card-text lead"><strong>Age:</strong> {user.user.age}</p>
+                                <button 
+                                className="btn btn-danger position-absolute" 
+                                style={{ top: "10px", right: "10px" }} 
+                                type="button" 
+                                onClick={logout}
+                                >
+                                    Logout
+                                </button>
+                            </div>
+                        </div>
                     </div>
-                    <h3 className="col">email: {user.user.email}</h3>
-                    <h3 className="col">age: {user.user.age}</h3>
 
                     {snippets.length > 0 ? (
-                        <div className="row mt-5">
-                            <h3>Snippets:</h3>
-                            {snippets.map((snippet, index) => (
-                                <a
-                                    key={index}
-                                    className="text-left"
-                                    style={{ textAlign: "left", fontSize: "22px", cursor: "pointer", marginLeft: "15px" }}
-                                    onClick={() => handleSnippetClick(snippetIds[index])}
-                                >
-                                    {snippet.title}
-                                    <span className="badge fw-normal text-bg-dark">{snippet.type}</span>
-                                </a>
-                            ))}
+                        <div className="row mt-5 justify-content-center">
+                            <h3 className="text-center">Snippets:</h3>
+                            <div className="col-12 col-lg-4 mt-2">
+                                <ul className="list-group shadow">
+                                    {snippets.map((snippet, index) => (
+                                        <li 
+                                        key={index} 
+                                        className="list-group-item d-flex justify-content-between align-items-center" 
+                                        style={{ cursor: "pointer" }} 
+                                        onClick={() => handleSnippetClick(snippetIds[index])}
+                                        >
+                                        <span style={{ fontSize: "20px" }}>{snippet.title}</span>
+                                        <span className="badge bg-primary">{snippet.type}</span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
                         </div>
                     ) : (
-                        <p>No snippets found.</p>
+                        <p className="mt-4 text-center">No snippets found.</p>
                     )}
                 </>
             ) : (
