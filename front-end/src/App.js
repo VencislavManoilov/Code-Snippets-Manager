@@ -8,6 +8,7 @@ import Profile from "./components/Profile";
 import Create from "./components/Create";
 import Snippet from "./components/Snippet";
 import Footer from "./components/Footer";
+import NotFound from './components/Not Found';
 import "./components/css/app.css";
 
 const URL = process.env.REACT_APP_BACKEND_URL || process.env.REACT_APP_CUSTOM_BACKEND_URL || "http://localhost:8080";
@@ -83,6 +84,7 @@ function App() {
                 <Route path='/profile' element={<Profile user={user} />} />
                 <Route path='/create' element={<Create />} />
                 <Route path='/snippet' element={<SnippetWrapper />} />
+                <Route path='*' element={< NotFound />}/>
             </Routes>
             <Footer />
         </Router>
