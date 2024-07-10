@@ -7,21 +7,26 @@ import QRCode from 'qrcode.react';
 
 const URL = process.env.REACT_APP_BACKEND_URL || process.env.REACT_APP_CUSTOM_BACKEND_URL || "http://localhost:8080";
 
-const Snippet = ({ snippetId, hasBackButton, backToProfileFunction }) => {
+const Snippet = ({ snippetId, hasBackButton, backToProfileFunction, theSnippet }) => {
     const [snippet, setSnippet] = useState(null);
     const [showQRCode, setShowQRCode] = useState(false);
 
-    useEffect(() => {
-        const fetchSnippet = async () => {
-            try {
-                const response = await axios.get(URL+"/snippet/get", { params: { id: snippetId } });
-                setSnippet(response.data.snippet);
-            } catch (error) {
-                console.log("Error getting the snippet:", error);
-            }
-        };
+    console.log(theSnippet);
 
-        fetchSnippet();
+    useEffect(() => {
+        if(!theSnippet) {
+            const fetchSnippet = async () => {
+                try {
+                    const response = await axios.get(URL+"/snippet/get", { params: { id: snippetId } });
+                    setSnippet(response.data.snippet);
+                } catch (error) {
+                    window.location.href = "/not_found";
+                }
+            };
+            fetchSnippet();
+        } else {
+            setSnippet(theSnippet);
+        }
     }, [snippetId]);
 
     useEffect(() => {

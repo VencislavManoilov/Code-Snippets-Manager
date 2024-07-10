@@ -122,7 +122,7 @@ const Profile = (user) => {
                     )}
                 </>
             ) : (
-                <Snippet snippetId={currentSnippetId} hasBackButton={true} backToProfileFunction={backToProfile} />
+                <Snippet snippetId={currentSnippetId} hasBackButton={true} backToProfileFunction={backToProfile} theSnippet={snippets.find(({ id }) => id === currentSnippetId)} />
             )}
         </div>
     );
