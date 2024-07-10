@@ -19,22 +19,27 @@ const Profile = (user) => {
                 if(response.data) {
                     setSnippetIds([]);
                     setSnippetIds(response.data.snippets);
-                    setSnippets([]);
-                    response.data.snippets.forEach(async (id) => {
-                        await fetchSnippet(id);
-                    });
+                    const snippets = await fetchAllSnippets(response.data.snippets)
+                    setSnippets(snippets);
                 }
             } catch (error) {
                 console.log("Error getting snippet ids:", error);
             }
         };
 
+        const fetchAllSnippets = async (ids) => {
+            const snippetPromises = ids.map((id) => fetchSnippet(id));
+            const snippets = await Promise.all(snippetPromises);
+            return snippets.filter(snippet => snippet !== null); // Filter out any null values in case of fetch errors
+        };
+
         const fetchSnippet = async (id) => {
             try {
-                const response = await axios.get(URL+"/snippet/get?id="+id, { withCredentials: true });
-                setSnippets((prevSnippets) => [...prevSnippets, response.data.snippet]);
-            } catch(error) {
+                const response = await axios.get(URL + "/snippet/get?id=" + id, { withCredentials: true });
+                return response.data.snippet;
+            } catch (error) {
                 console.log("Error getting the snippet:", error);
+                return null;
             }
         };
 
