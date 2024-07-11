@@ -24,26 +24,26 @@ const InitComponent = ({ user }) => {
     ) : (
         <div className="container-fluid mt-5 text-center">
             <section id="hero">
-                <p className="h1">Effortlessly Save, Share, and Manage Your Code Snippets</p>
-                <p className="h5 fw-normal mt-4">Join thousands of developers who use our tool to boost their productivity. <a className="btn btn-success" href="/signup">Sign Up</a></p>
+                <p className="h1 text-body-emphasis">Save, Share, and Edit Your Code Snippets!</p>
+                <p className="h5 fw-normal mt-2 text-body-secondary">Boost your productivity now! <a className="btn btn-success" href="/signup">Sign Up</a></p>
             </section>
 
             <section id="features" className="row gy-3 mt-5">
-                <h2>Features</h2>
+                <h2 className='text-body-emphasis'>Features</h2>
 
                 <div className="feature">
-                    <h4>🎨 Syntax Highlighting</h4>
-                    <p>Supports 156 different languages.</p>
+                    <h5>🎨 Syntax Highlighting</h5>
+                    <p className='text-body-tertiary'>Supports 156 different languages.</p>
                 </div>
 
                 <div className="feature">
-                    <h4>🔁 Share</h4>
-                    <p>Use QR code or URL to share your snippet to anyone!</p>
+                    <h5>🔁 Share</h5>
+                    <p className='text-body-tertiary'>Use QR code or URL to share your snippet to anyone!</p>
                 </div>
 
                 <div className="feature">
-                    <h4>✏️ Edit</h4>
-                    <p>Coming soon!</p>
+                    <h5>✏️ Edit</h5>
+                    <p className='text-body-tertiary'>Coming soon!</p>
                 </div>
             </section>
         </div>
