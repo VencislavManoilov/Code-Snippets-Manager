@@ -65,7 +65,11 @@ const Create = () => {
     const updateTextarea = () => {
         const textarea = textareaRef.current;
         textarea.style.overflow = 'hidden';
-        textarea.style.height = textarea.scrollHeight + "px";
+        if(parseFloat(textarea.style.height) < 300) {
+            textarea.style.height = "300px";
+        } else {
+            textarea.style.height = textarea.scrollHeight + "px";
+        }
     };
 
     useEffect(() => {
@@ -124,6 +128,7 @@ const Create = () => {
                     <textarea
                         id="textarea"
                         className="form-control"
+                        rows={10}
                         ref={textareaRef}
                         value={code}
                         onChange={(e) => setCode(e.target.value)}
