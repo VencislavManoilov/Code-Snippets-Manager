@@ -70,6 +70,10 @@ const Profile = (user) => {
         setView("profile");
     };
 
+    const edit = () => {
+        // TO DO: Go to new page
+    }
+
     return (
         <div className="container">
             {view === "profile" ? (
@@ -105,13 +109,23 @@ const Profile = (user) => {
                                 <ul className="list-group shadow">
                                     {snippets.map((snippet, index) => (
                                         <li 
-                                        key={index} 
-                                        className="list-group-item d-flex justify-content-between align-items-center" 
-                                        style={{ cursor: "pointer" }} 
-                                        onClick={() => handleSnippetClick(snippetIds[index])}
+                                            key={index} 
+                                            className="list-group-item d-flex justify-content-between align-items-center" 
+                                            style={{ cursor: "pointer" }} 
+                                            onClick={() => handleSnippetClick(snippetIds[index])}
                                         >
-                                        <span style={{ fontSize: "20px" }}>{snippet.title}</span>
-                                        <span className="badge bg-primary">{snippet.type}</span>
+                                            <span style={{ fontSize: "20px" }}>{snippet.title}</span>
+                                            <div className="d-flex align-items-center">
+                                                <button
+                                                type="button"
+                                                className="button btn btn-secondary"
+                                                onClick={(e) => {
+                                                    e.stopPropagation();
+                                                    edit();
+                                                }}
+                                                >Edit</button>
+                                                <span className="badge bg-primary ms-2">{snippet.type}</span>
+                                            </div>
                                         </li>
                                     ))}
                                 </ul>
