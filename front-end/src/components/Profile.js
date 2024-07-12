@@ -101,7 +101,7 @@ const Profile = (user) => {
                     {snippets.length > 0 ? (
                         <div className="row mt-5 justify-content-center">
                             <h3 className="text-center">Snippets:</h3>
-                            <div className="col-12 col-lg-4 mt-2">
+                            <div className="col-12 col-md-8 mt-2">
                                 <ul className="list-group shadow">
                                     {snippets.map((snippet, index) => (
                                         <li 
