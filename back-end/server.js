@@ -104,6 +104,12 @@ app.use("/snippet/ids", (req, res, next) => {
     next();
 }, getUserSnippetIds);
 
+const editSnippetRoute = require("./routes/editSnippet");
+app.use("/snippet/edit", (req, res, next) => {
+    req.db = db;
+    next();
+}, editSnippetRoute);
+
 const getUserRoute = require("./routes/getUser");
 app.use("/user", (req, res, next) => {
     req.db = db;
