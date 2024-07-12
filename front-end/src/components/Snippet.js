@@ -34,7 +34,7 @@ const Snippet = ({ snippetId, hasBackButton, backToProfileFunction, theSnippet }
     }, [snippet]);
 
     const CopyURL = () => {
-        navigator.clipboard.writeText("http://localhost:3000/snippet?id=" + snippetId);
+        navigator.clipboard.writeText(URL+"/snippet?id=" + snippetId);
     }
 
     const handleShowQRCode = () => {
