@@ -6,6 +6,7 @@ import Login from "./components/Login";
 import Signup from "./components/Signup";
 import Profile from "./components/Profile";
 import Create from "./components/Create";
+import Edit from './components/Edit';
 import Snippet from "./components/Snippet";
 import Footer from "./components/Footer";
 import NotFound from './components/Not Found';
@@ -84,6 +85,7 @@ function App() {
                 <Route path='/profile' element={<Profile user={user} />} />
                 <Route path='/create' element={<Create />} />
                 <Route path='/snippet' element={<SnippetWrapper />} />
+                <Route path='/edit' element={<Edit />} />
                 <Route path='*' element={< NotFound />}/>
             </Routes>
             <Footer />
