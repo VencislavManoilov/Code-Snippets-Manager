@@ -1,5 +1,6 @@
 import React from "react";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./css/main.css";
 import Snippet from "./Snippet";
@@ -70,8 +71,9 @@ const Profile = (user) => {
         setView("profile");
     };
 
-    const edit = () => {
-        // TO DO: Go to new page
+    const navigate = useNavigate();
+    const edit = (snippetId, snippetContent) => {
+        navigate(`/edit/${snippetId}`, { state: { snippetContent } });
     }
 
     return (
@@ -121,7 +123,7 @@ const Profile = (user) => {
                                                 className="button btn btn-secondary"
                                                 onClick={(e) => {
                                                     e.stopPropagation();
-                                                    edit();
+                                                    edit(snippet.id, snippet);
                                                 }}
                                                 >Edit</button>
                                                 <span className="badge bg-primary ms-2">{snippet.type}</span>

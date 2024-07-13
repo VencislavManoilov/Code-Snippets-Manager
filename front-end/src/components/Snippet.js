@@ -11,8 +11,6 @@ const Snippet = ({ snippetId, hasBackButton, backToProfileFunction, theSnippet }
     const [snippet, setSnippet] = useState(null);
     const [showQRCode, setShowQRCode] = useState(false);
 
-    console.log(theSnippet);
-
     useEffect(() => {
         if(!theSnippet) {
             const fetchSnippet = async () => {
@@ -34,7 +32,7 @@ const Snippet = ({ snippetId, hasBackButton, backToProfileFunction, theSnippet }
     }, [snippet]);
 
     const CopyURL = () => {
-        navigator.clipboard.writeText(URL+"/snippet?id=" + snippetId);
+        // navigator.clipboard.writeText(URL+"/snippet?id=" + snippetId);
     }
 
     const handleShowQRCode = () => {

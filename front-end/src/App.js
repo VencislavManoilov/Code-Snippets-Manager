@@ -85,7 +85,7 @@ function App() {
                 <Route path='/profile' element={<Profile user={user} />} />
                 <Route path='/create' element={<Create />} />
                 <Route path='/snippet' element={<SnippetWrapper />} />
-                <Route path='/edit' element={<Edit />} />
+                <Route path="/edit/:snippetId" element={<Edit />} />
                 <Route path='*' element={< NotFound />}/>
             </Routes>
             <Footer />
