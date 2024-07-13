@@ -39,12 +39,23 @@ const Edit = () => {
     const textareaRef = useRef(null);
     
     useEffect(() => {
+        if(snippetContent) {
+            setTitle(snippetContent.title);
+            setCode(snippetContent.code);
+            setType(snippetContent.type);
+            setLoading(false);
+        } else {
+            GetSnippet();
+        }
+    }, [snippetContent]);
+
+    useEffect(() => {
         const textarea = textareaRef.current;
 
-        if (!textarea) return;
+        if(!textarea) return;
 
         const handleTabPress = (event) => {
-            if (event.key === 'Tab') {
+            if(event.key === 'Tab') {
                 event.preventDefault();
                 const start = textarea.selectionStart;
                 const end = textarea.selectionEnd;
@@ -67,47 +78,39 @@ const Edit = () => {
         };
     }, []);
 
+    useEffect(() => {
+        const textarea = textareaRef.current;
+        if(textarea) {
+            textarea.style.height = 'auto'; // Reset the height
+            textarea.style.height = `${textarea.scrollHeight}px`; // Set the new height
+        }
+    }, [code]);
+
     const updateTextarea = () => {
         const textarea = textareaRef.current;
-        textarea.style.overflow = 'hidden';
-        if(parseFloat(textarea.style.height) < 300) {
-            textarea.style.height = "300px";
-        } else {
-            textarea.style.height = textarea.scrollHeight + "px";
+        if(textarea) {
+            textarea.style.overflow = 'hidden';
+            textarea.style.height = 'auto'; // Reset the height
+            textarea.style.height = `${textarea.scrollHeight}px`; // Set the new height
         }
     };
-
-    useEffect(() => {
-        updateTextarea();
-    }, [code]);
 
     const GetSnippet = async () => {
         try {
             const result = await axios.get(URL+"/snippet/get", {
-                id: snippetId
+                params: { id: snippetId }
             }, { withCredentials: true });
 
-            if(result) {
-                setTitle(result.title);
-                setCode(result.code);
-                setType(result.type);
+            if(result.data) {
+                setTitle(result.data.title);
+                setCode(result.data.code);
+                setType(result.data.type);
                 setLoading(false);
             }
-        } catch(err) {
+        } catch (err) {
             console.log("Error: ", err);
         }
     }
-
-    useEffect(() => {
-        if(snippetContent) {
-            setTitle(snippetContent.title);
-            setCode(snippetContent.code);
-            setType(snippetContent.type);
-            setLoading(false);
-        } else {
-            GetSnippet();
-        }
-    }, []);
 
     const CheckType = (type) => {
         return validTypes.has(type);
@@ -120,7 +123,7 @@ const Edit = () => {
         }
 
         try {
-            const response = await axios.put(URL+"/snippet/edit", {
+            await axios.put(URL+"/snippet/edit", {
                 id: snippetId,
                 title: title,
                 code: code,
@@ -128,11 +131,9 @@ const Edit = () => {
             }, { withCredentials: true });
 
             window.location.href = "/profile";
-        } catch(error) {
+        } catch (error) {
             document.getElementById("error").textContent = "Something went wrong ";
         }
-
-        return (<></>);
     }
 
     return (
@@ -141,12 +142,12 @@ const Edit = () => {
                 <p>Loading...</p>
             ) : (
                 <div className="container mt-5">
-                    <div id="error" style={{display: 'none', position: 'sticky'}} className="alert alert-danger alert-dismissible fade show">
+                    <div id="error" style={{ display: 'none', position: 'sticky' }} className="alert alert-danger alert-dismissible fade show">
                         The fields are not filled!
-                        <button type="button" className="btn-close" onClick={() => {document.getElementById("error").style.display = "none"}}></button>
+                        <button type="button" className="btn-close" onClick={() => { document.getElementById("error").style.display = "none" }}></button>
                     </div>
                     <div className="col-lg-6">
-                        <label htmlFor="title" style={{fontSize: 30, fontWeight: "bold"}}>Title</label>
+                        <label htmlFor="title" style={{ fontSize: 30, fontWeight: "bold" }}>Title</label>
                         <input
                             id="title"
                             className="form-control form-control-lg"
@@ -157,7 +158,7 @@ const Edit = () => {
                     </div>
         
                     <div className="col-12 mt-4">
-                        <label htmlFor="textarea" className="form-label" style={{fontSize: 25, fontWeight: "bold"}}>Code</label>
+                        <label htmlFor="textarea" className="form-label" style={{ fontSize: 25, fontWeight: "bold" }}>Code</label>
                         <textarea
                             id="textarea"
                             className="form-control"
@@ -166,12 +167,11 @@ const Edit = () => {
                             value={code}
                             onChange={(e) => setCode(e.target.value)}
                             onInput={updateTextarea}
-                            style={{ overflow: 'hidden', resize: 'none' }}
                         />
                     </div>
         
                     <div className="col-8 col-lg-3 mt-3 row text-center">
-                        <label htmlFor="select" className="form-label col-auto" style={{fontSize: 22, fontWeight: "bold"}}>Type</label>
+                        <label htmlFor="select" className="form-label col-auto" style={{ fontSize: 22, fontWeight: "bold" }}>Type</label>
                         <select
                             id="select"
                             className="form-control selectpicker col"
@@ -186,7 +186,7 @@ const Edit = () => {
                         </select>
                     </div>
         
-                    <div className="col-12 text-end" style={{marginBottom: '50px'}}>
+                    <div className="col-12 text-end" style={{ marginBottom: '50px' }}>
                         <button className="btn btn-success" onClick={Done}>Done</button>
                     </div>
                 </div>
