@@ -36,7 +36,7 @@ db.connect((err) => {
 
 // Session store setup
 const sessionStore = new MySQLStore({
-    expiration: 1000 * 60 * 60 * 24, // 1 day
+    expiration: 1000 * 60 * 60 * 24 * 7, // 7 days
     endConnectionOnClose: false // Keep the connection open for session store
 }, db.promise());
 
@@ -48,7 +48,7 @@ app.use(session({
     resave: false,
     saveUninitialized: false,
     cookie: {
-        maxAge: 1000 * 60 * 60 * 24, // 1 day
+        maxAge: 1000 * 60 * 60 * 24 * 7, // 7 days
         secure: false,
         httpOnly: true
     }
