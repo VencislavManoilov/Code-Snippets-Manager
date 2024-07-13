@@ -61,10 +61,12 @@ const Edit = () => {
                 const end = textarea.selectionEnd;
 
                 // Set textarea value to: text before caret + tab + text after caret
-                textarea.value = textarea.value.substring(0, start) + "\t" + textarea.value.substring(end);
+                setCode(code.substring(0, start) + "\t" + code.substring(end));
 
                 // Put caret at right position again
-                textarea.selectionStart = textarea.selectionEnd = start + 1;
+                setTimeout(() => {
+                    textarea.selectionStart = textarea.selectionEnd = start + 1;
+                }, 0);
 
                 // Adjust the height of the textarea
                 updateTextarea();
@@ -76,7 +78,7 @@ const Edit = () => {
         return () => {
             textarea.removeEventListener('keydown', handleTabPress);
         };
-    }, []);
+    }, [code]);
 
     useEffect(() => {
         const textarea = textareaRef.current;
