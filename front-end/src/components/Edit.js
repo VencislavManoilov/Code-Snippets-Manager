@@ -144,11 +144,14 @@ const Edit = () => {
                 <p>Loading...</p>
             ) : (
                 <div className='container mt-5' style={{backgroundColor: "rgba(0, 0, 0, 0.15)", border: "2px solid rgba(0, 0, 0, 0.3)", borderRadius: "20px"}}>
-                    <div className="container mt-5">
+                    <div className="container mt-3">
                         <div id="error" style={{ display: 'none', position: 'sticky' }} className="alert alert-danger alert-dismissible fade show">
                             The fields are not filled!
                             <button type="button" className="btn-close" onClick={() => { document.getElementById("error").style.display = "none" }}></button>
                         </div>
+
+                        <div className="fs-1 fw-semibold text-light">Edit</div>
+
                         <div className="col-lg-6">
                             <label htmlFor="title" style={{ fontSize: 30, fontWeight: "bold" }}>Title</label>
                             <input
