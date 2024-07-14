@@ -42,7 +42,7 @@ const InitComponent = ({ user }) => {
 
                 <div className="feature">
                     <h5>✏️ Edit</h5>
-                    <p className='text-body-tertiary'>Coming soon!</p>
+                    <p className='text-body-tertiary'>Edit your code snippets effortlessly.</p>
                 </div>
             </section>
         </div>
