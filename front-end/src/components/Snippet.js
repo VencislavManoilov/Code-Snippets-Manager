@@ -12,7 +12,7 @@ const Snippet = ({ snippetId, hasBackButton, backToProfileFunction, theSnippet }
     const [snippet, setSnippet] = useState(null);
     const [showQRCode, setShowQRCode] = useState(false);
     const [canEdit, setEdit] = useState(false);
-
+    
     useEffect(() => {
         if(!theSnippet) {
             const fetchSnippet = async () => {
@@ -32,6 +32,23 @@ const Snippet = ({ snippetId, hasBackButton, backToProfileFunction, theSnippet }
     useEffect(() => {
         hljs.highlightAll();
     }, [snippet]);
+
+    useEffect(() => {
+        const getUser = async () => {
+            try {
+                const response = await axios.get(URL+"/user", { withCredentials: true });
+                if(response.status === 200) {
+                    if(response.data.user.id === snippet.user_id) {
+                        setEdit(true);
+                    }
+                }
+            } catch (err) {}
+        }
+
+        if(snippet) {
+            getUser();
+        }
+    }, [snippet])
 
     const CopyURL = () => {
         navigator.clipboard.writeText(URL+"/snippet?id=" + snippetId);
