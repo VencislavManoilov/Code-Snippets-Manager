@@ -10,6 +10,7 @@ const URL = process.env.REACT_APP_BACKEND_URL || process.env.REACT_APP_CUSTOM_BA
 const Snippet = ({ snippetId, hasBackButton, backToProfileFunction, theSnippet }) => {
     const [snippet, setSnippet] = useState(null);
     const [showQRCode, setShowQRCode] = useState(false);
+    const [canEdit, setEdit] = useState(false);
 
     useEffect(() => {
         if(!theSnippet) {
@@ -46,12 +47,14 @@ const Snippet = ({ snippetId, hasBackButton, backToProfileFunction, theSnippet }
             ) : (<></>)}
             {snippet ? (
                 <div className="mt-3">
-                    <h1>{snippet.title}</h1>
+                    <div className="d-flex justify-content-between align-items-center">
+                        <h1 className="mb-0">{snippet.title}</h1>
+                        <button type="button" className="btn btn-secondary">Edit</button>
+                    </div>
                     <pre><code className={"language-"+snippet.type}>{snippet.code}</code></pre>
                     <span className="h4">Type: <span className="badge text-bg-secondary">{snippet.type}</span></span>
 
                     <div className="row col-12 mt-3">
-                        <button type="button" className="btn btn-secondary col-auto me-3">Edit</button>
 
                         <button type="button" className="btn btn-secondary col-auto me-3" data-bs-toggle="modal" data-bs-target="#exampleModal2" onClick={handleShowQRCode}>Show QR code</button>
 
