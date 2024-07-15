@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./css/main.css";
 import hljs from 'highlight.js';
 import 'highlight.js/styles/monokai-sublime.css';
 import QRCode from 'qrcode.react';
-import Edit from "./Edit";
 
 const URL = process.env.REACT_APP_BACKEND_URL || process.env.REACT_APP_CUSTOM_BACKEND_URL || "http://localhost:8080";
 
@@ -51,7 +51,7 @@ const Snippet = ({ snippetId, hasBackButton, backToProfileFunction, theSnippet }
     }, [snippet])
 
     const CopyURL = () => {
-        navigator.clipboard.writeText(URL+"/snippet?id=" + snippetId);
+        navigator.clipboard.writeText(window.location.origin+"/snippet?id=" + snippetId);
     }
 
     const handleShowQRCode = () => {
