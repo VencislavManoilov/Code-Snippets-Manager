@@ -50,6 +50,11 @@ const Snippet = ({ snippetId, hasBackButton, backToProfileFunction, theSnippet }
         }
     }, [snippet])
 
+    const navigate = useNavigate();
+    const Edit = (snippetContent) => {
+        navigate(`/edit/${snippetId}`, { state: { snippetContent } });
+    }
+
     const CopyURL = () => {
         navigator.clipboard.writeText(window.location.origin+"/snippet?id=" + snippetId);
     }
@@ -67,7 +72,7 @@ const Snippet = ({ snippetId, hasBackButton, backToProfileFunction, theSnippet }
                 <div className="mt-3">
                     <div className="d-flex justify-content-between align-items-center">
                         <h1 className="mb-0">{snippet.title}</h1>
-                        {canEdit ? (<button type="button" className="btn btn-secondary" onClick={Edit}>Edit</button>): (<></>)}
+                        {canEdit ? (<button type="button" className="btn btn-secondary" onClick={() => {Edit(snippet)}}>Edit</button>): (<></>)}
                     </div>
                     <pre><code className={"language-"+snippet.type}>{snippet.code}</code></pre>
                     <span className="h4">Type: <span className="badge text-bg-secondary">{snippet.type}</span></span>
