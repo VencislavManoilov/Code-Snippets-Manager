@@ -51,6 +51,8 @@ const Snippet = ({ snippetId, hasBackButton, backToProfileFunction, theSnippet }
                     <span className="h4">Type: <span className="badge text-bg-secondary">{snippet.type}</span></span>
 
                     <div className="row col-12 mt-3">
+                        <button type="button" className="btn btn-secondary col-auto me-3">Edit</button>
+
                         <button type="button" className="btn btn-secondary col-auto me-3" data-bs-toggle="modal" data-bs-target="#exampleModal2" onClick={handleShowQRCode}>Show QR code</button>
 
                         <div className="modal fade" id="exampleModal2" tabIndex="-1" aria-labelledby="exampleModalLabel2" aria-hidden="true">
