@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation, useParams } from "react-router-dom";
 import axios from "axios";
 import "./css/main.css";
 import hljs from 'highlight.js';
@@ -8,7 +8,18 @@ import QRCode from 'qrcode.react';
 
 const URL = process.env.REACT_APP_BACKEND_URL || process.env.REACT_APP_CUSTOM_BACKEND_URL || "http://localhost:8080";
 
-const Snippet = ({ snippetId, hasBackButton, backToProfileFunction, theSnippet }) => {
+const Snippet = ({ snippetId: propSnippetId, hasBackButton: propHasBackButton, backToProfileFunction: propBackToProfileFunction, theSnippet: propTheSnippet }) => {
+    // Get params and location state
+    const { snippetId: paramSnippetId } = useParams();
+    const location = useLocation();
+    const { hasBackButton: stateHasBackButton, backToProfileFunction: stateBackToProfileFunction, theSnippet: stateTheSnippet } = location.state || {};
+
+    // Determine final values, prioritizing props over params and location state
+    const snippetId = propSnippetId ?? paramSnippetId;
+    const hasBackButton = propHasBackButton ?? stateHasBackButton;
+    const backToProfileFunction = propBackToProfileFunction ?? stateBackToProfileFunction;
+    const theSnippet = propTheSnippet ?? stateTheSnippet;
+
     const [snippet, setSnippet] = useState(null);
     const [showQRCode, setShowQRCode] = useState(false);
     const [canEdit, setEdit] = useState(false);
@@ -57,7 +68,7 @@ const Snippet = ({ snippetId, hasBackButton, backToProfileFunction, theSnippet }
     }
 
     const CopyURL = () => {
-        navigator.clipboard.writeText(window.location.origin+"/snippet?id=" + snippetId).then(() => {
+        navigator.clipboard.writeText(window.location.origin+"/snippet/" + snippetId).then(() => {
             setCopyMessage("Copied to clipboard");
         }, (err) => {
             setCopyMessage("Couldn't be copied");
