@@ -8,6 +8,8 @@ import Snippet from "./Snippet";
 const URL = process.env.REACT_APP_BACKEND_URL || process.env.REACT_APP_CUSTOM_BACKEND_URL || "http://localhost:8080";
 
 const Profile = (user) => {
+    const navigate = useNavigate();
+    
     const [snippetIds, setSnippetIds] = useState([]);
     const [snippets, setSnippets] = useState([]);
     const [view, setView] = useState("profile");
@@ -59,20 +61,19 @@ const Profile = (user) => {
     };
 
     const handleSnippetClick = (snippetId) => {
-        setCurrentSnippetId(snippetId);
-        navigate(`/snippet/${snippetId}`, {state: { hasBackButton: true, backToProfileFunction: false, theSnippet: snippets.find(({ id }) => id === currentSnippetId) }})
-        // setView("snippet");
+        const snippet = snippets.find(({ id }) => id === currentSnippetId);
+        navigate(`/snippet/${snippetId}`, {
+            state: {
+                hasBackButton: true,
+                theSnippet: snippet
+            }
+        })
     };
 
     const back = () => {
         window.location.href = "/";
     };
 
-    const backToProfile = () => {
-        window.location.href = "/profile";
-    };
-
-    const navigate = useNavigate();
     const edit = (snippetId, snippetContent) => {
         navigate(`/edit/${snippetId}`, { state: { snippetContent } });
     }

@@ -8,17 +8,13 @@ import QRCode from 'qrcode.react';
 
 const URL = process.env.REACT_APP_BACKEND_URL || process.env.REACT_APP_CUSTOM_BACKEND_URL || "http://localhost:8080";
 
-const Snippet = ({ snippetId: propSnippetId, hasBackButton: propHasBackButton, backToProfileFunction: propBackToProfileFunction, theSnippet: propTheSnippet }) => {
+const Snippet = () => {
     // Get params and location state
-    const { snippetId: paramSnippetId } = useParams();
+    const { snippetId } = useParams();
     const location = useLocation();
-    const { hasBackButton: stateHasBackButton, backToProfileFunction: stateBackToProfileFunction, theSnippet: stateTheSnippet } = location.state || {};
+    const { hasBackButton, theSnippet } = location.state || {};
 
-    // Determine final values, prioritizing props over params and location state
-    const snippetId = propSnippetId ?? paramSnippetId;
-    const hasBackButton = propHasBackButton ?? stateHasBackButton;
-    const backToProfileFunction = propBackToProfileFunction ?? stateBackToProfileFunction;
-    const theSnippet = propTheSnippet ?? stateTheSnippet;
+    console.log(snippetId, hasBackButton, theSnippet);
 
     const [snippet, setSnippet] = useState(null);
     const [showQRCode, setShowQRCode] = useState(false);
@@ -82,7 +78,7 @@ const Snippet = ({ snippetId: propSnippetId, hasBackButton: propHasBackButton, b
     return (
         <div className="container mt-5">
             {hasBackButton ? (
-                <button className="btn btn-secondary btn-block" type="button" onClick={backToProfileFunction}>Go to Profile</button>
+                <button className="btn btn-secondary btn-block" type="button" onClick={() => {window.location.href = "/profile"}}>Go to Profile</button>
             ) : (<></>)}
             {snippet ? (
                 <div className="mt-3">
