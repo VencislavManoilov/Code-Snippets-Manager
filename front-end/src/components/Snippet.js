@@ -72,9 +72,9 @@ const Snippet = ({ snippetId, hasBackButton, backToProfileFunction, theSnippet }
                 <div className="mt-3">
                     <div className="d-flex justify-content-between align-items-center">
                         <h1 className="mb-0">{snippet.title}</h1>
-                        {canEdit ? (<button type="button" className="btn btn-secondary" onClick={() => {Edit(snippet)}}>Edit</button>): (<></>)}
+                        {canEdit ? (<button type="button" className="btn btn-dark" onClick={() => {Edit(snippet)}}><svg class="feather feather-edit" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>): (<></>)}
                     </div>
-                    <pre><code className={"language-"+snippet.type}>{snippet.code}</code></pre>
+                    <pre><code className={"mt-2 language-"+snippet.type}>{snippet.code}</code></pre>
                     <span className="h4">Type: <span className="badge text-bg-secondary">{snippet.type}</span></span>
 
                     <div className="row col-12 mt-3">
