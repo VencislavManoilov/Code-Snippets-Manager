@@ -89,7 +89,7 @@ const Snippet = ({ snippetId, hasBackButton, backToProfileFunction, theSnippet }
                                         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div className="modal-body text-center" style={{margin: "none"}}>
-                                        {showQRCode && <QRCode value={"https://localhost:3000/snippet?id=" + snippetId} size={256} />}
+                                        {showQRCode && <QRCode value={window.location.origin+"/snippet?id=" + snippetId} size={256} />}
                                     </div>
                                     <div className="modal-footer">
                                         <button type="button" data-bs-dismiss="modal" className="btn btn-primary">OK</button>
