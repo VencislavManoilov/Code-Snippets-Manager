@@ -12,6 +12,7 @@ const Snippet = ({ snippetId, hasBackButton, backToProfileFunction, theSnippet }
     const [snippet, setSnippet] = useState(null);
     const [showQRCode, setShowQRCode] = useState(false);
     const [canEdit, setEdit] = useState(false);
+    const [copyMessage, setCopyMessage] = useState("");
     
     useEffect(() => {
         if(!theSnippet) {
@@ -56,7 +57,11 @@ const Snippet = ({ snippetId, hasBackButton, backToProfileFunction, theSnippet }
     }
 
     const CopyURL = () => {
-        navigator.clipboard.writeText(window.location.origin+"/snippet?id=" + snippetId);
+        navigator.clipboard.writeText(window.location.origin+"/snippet?id=" + snippetId).then(() => {
+            setCopyMessage("Copied to clipboard");
+        }, (err) => {
+            setCopyMessage("Couldn't be copied");
+        });
     }
 
     const handleShowQRCode = () => {
@@ -106,7 +111,7 @@ const Snippet = ({ snippetId, hasBackButton, backToProfileFunction, theSnippet }
                             <div className="modal-dialog">
                                 <div className="modal-content">
                                     <div className="modal-header">
-                                        <h1 className="modal-title fs-5" id="exampleModalLabel">Copied to Clipboard!</h1>
+                                        <h1 className="modal-title fs-5" id="exampleModalLabel">{copyMessage}</h1>
                                     </div>
                                     <div className="modal-footer">
                                         <button type="button" data-bs-dismiss="modal" className="btn btn-primary">OK</button>
