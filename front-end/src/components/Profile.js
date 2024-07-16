@@ -60,7 +60,8 @@ const Profile = (user) => {
 
     const handleSnippetClick = (snippetId) => {
         setCurrentSnippetId(snippetId);
-        setView("snippet");
+        navigate(`/snippet/${snippetId}`, {state: { hasBackButton: true, backToProfileFunction: false, theSnippet: snippets.find(({ id }) => id === currentSnippetId) }})
+        // setView("snippet");
     };
 
     const back = () => {
@@ -68,7 +69,7 @@ const Profile = (user) => {
     };
 
     const backToProfile = () => {
-        setView("profile");
+        window.location.href = "/profile";
     };
 
     const navigate = useNavigate();
@@ -78,67 +79,61 @@ const Profile = (user) => {
 
     return (
         <div className="container">
-            {view === "profile" ? (
-                <>
-                    <div className="row mt-4">
-                        <div className="col-auto">
-                            <button className="btn btn-secondary btn-block" type="button" onClick={back}>Back</button>
-                        </div>
-                    </div>
+            <div className="row mt-4">
+                <div className="col-auto">
+                    <button className="btn btn-secondary btn-block" type="button" onClick={back}>Back</button>
+                </div>
+            </div>
 
-                    <div className="row mt-5 justify-content-center">
-                        <div className="col-12 col-md-8 text-center">
-                            <div className="card p-4 shadow">
-                                <h1 className="card-title display-4 mb-3">{user.user.name}</h1>
-                                <p className="card-text lead"><strong>Email:</strong> {user.user.email}</p>
-                                <p className="card-text lead"><strong>Age:</strong> {user.user.age}</p>
-                                <button 
-                                className="btn btn-danger position-absolute" 
-                                style={{ top: "10px", right: "10px" }} 
-                                type="button" 
-                                onClick={logout}
+            <div className="row mt-5 justify-content-center">
+                <div className="col-12 col-md-8 text-center">
+                    <div className="card p-4 shadow">
+                        <h1 className="card-title display-4 mb-3">{user.user.name}</h1>
+                        <p className="card-text lead"><strong>Email:</strong> {user.user.email}</p>
+                        <p className="card-text lead"><strong>Age:</strong> {user.user.age}</p>
+                        <button 
+                        className="btn btn-danger position-absolute" 
+                        style={{ top: "10px", right: "10px" }} 
+                        type="button" 
+                        onClick={logout}
+                        >
+                            Logout
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            {snippets.length > 0 ? (
+                <div className="row mt-5 justify-content-center">
+                    <h3 className="text-center">Snippets:</h3>
+                    <div className="col-12 col-md-8 mt-2">
+                        <ul className="list-group shadow">
+                            {snippets.map((snippet, index) => (
+                                <li 
+                                    key={index} 
+                                    className="list-group-item d-flex justify-content-between align-items-center" 
+                                    style={{ cursor: "pointer" }} 
+                                    onClick={() => handleSnippetClick(snippetIds[index])}
                                 >
-                                    Logout
-                                </button>
-                            </div>
-                        </div>
+                                    <span style={{ fontSize: "20px" }}>{snippet.title}</span>
+                                    <div className="d-flex align-items-center">
+                                        <button
+                                        type="button"
+                                        className="btn btn-dark"
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            edit(snippet.id, snippet);
+                                        }}
+                                        ><svg class="feather feather-edit" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
+                                        <span className="badge bg-primary ms-2">{snippet.type}</span>
+                                    </div>
+                                </li>
+                            ))}
+                        </ul>
                     </div>
-
-                    {snippets.length > 0 ? (
-                        <div className="row mt-5 justify-content-center">
-                            <h3 className="text-center">Snippets:</h3>
-                            <div className="col-12 col-md-8 mt-2">
-                                <ul className="list-group shadow">
-                                    {snippets.map((snippet, index) => (
-                                        <li 
-                                            key={index} 
-                                            className="list-group-item d-flex justify-content-between align-items-center" 
-                                            style={{ cursor: "pointer" }} 
-                                            onClick={() => handleSnippetClick(snippetIds[index])}
-                                        >
-                                            <span style={{ fontSize: "20px" }}>{snippet.title}</span>
-                                            <div className="d-flex align-items-center">
-                                                <button
-                                                type="button"
-                                                className="btn btn-dark"
-                                                onClick={(e) => {
-                                                    e.stopPropagation();
-                                                    edit(snippet.id, snippet);
-                                                }}
-                                                ><svg class="feather feather-edit" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
-                                                <span className="badge bg-primary ms-2">{snippet.type}</span>
-                                            </div>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
-                        </div>
-                    ) : (
-                        <p className="mt-4 text-center">No snippets found.</p>
-                    )}
-                </>
+                </div>
             ) : (
-                <Snippet snippetId={currentSnippetId} hasBackButton={true} backToProfileFunction={backToProfile} theSnippet={snippets.find(({ id }) => id === currentSnippetId)} />
+                <p className="mt-4 text-center">No snippets found.</p>
             )}
         </div>
     );
