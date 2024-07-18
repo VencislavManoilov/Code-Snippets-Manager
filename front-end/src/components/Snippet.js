@@ -62,11 +62,18 @@ const Snippet = () => {
     }
 
     const CopyURL = () => {
-        navigator.clipboard.writeText(window.location.origin+"/snippet/" + snippetId).then(() => {
-            setCopyMessage("Copied to clipboard");
-        }, (err) => {
+        if(navigator.clipboard) {
+            navigator.clipboard.writeText(window.location.origin + "/snippet/" + snippetId)
+            .then(() => {
+                setCopyMessage("Copied to clipboard");
+            })
+            .catch(err => {
+                setCopyMessage("Couldn't be copied");
+                console.error('Failed to copy:', err);
+            });
+        } else {
             setCopyMessage("Couldn't be copied");
-        });
+        }
     }
 
     const handleShowQRCode = () => {
@@ -99,7 +106,7 @@ const Snippet = () => {
                                         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div className="modal-body text-center" style={{margin: "none"}}>
-                                        {showQRCode && <QRCode value={window.location.origin+"/snippet?id=" + snippetId} size={256} />}
+                                        {showQRCode && <QRCode value={window.location.origin+"/snippet/" + snippetId} size={256} />}
                                     </div>
                                     <div className="modal-footer">
                                         <button type="button" data-bs-dismiss="modal" className="btn btn-primary">OK</button>
@@ -108,7 +115,7 @@ const Snippet = () => {
                             </div>
                         </div>
 
-                        <button type="button" className="btn btn-primary col-auto" onClick={CopyURL()} data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <button type="button" className="btn btn-primary col-auto" onClick={() => {CopyURL()}} data-bs-toggle="modal" data-bs-target="#exampleModal">
                         Copy URL
                         </button>
 
